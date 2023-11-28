@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        button {
+            border:none;
+            background: none;
+            animation: slowmove .5s linear;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            max-width: max-content;
+            gap:10px;
+            position: relative;
+            margin:100px auto;
+        }
+        .board div {
+            border:2px solid black;
+            color:white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            animation: slowmove .5s linear;
+            cursor: pointer;
+        }
+        .absolute {
+            background-color: rgba(255, 0, 0, 0.603);
+            position: absolute;
+            width: 100%;
+            height: 87%;
+            top:0;
+            left:0;
+            animation: slowmove .5s linear;
+            visibility: hidden;
+            font-family: cursive;
+            color:white;
+            border:solid 2px black;
+            font-size: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .headertext {
+            position: absolute;
+            top:-20%;
+            left:50%;
+            transform: translateX(-50%);
+            color:black !important;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: cursive;
+
+        }
+        @keyframes slowmove {
+            from {
+                transform: scale(0.5);
+            }
+        }
+        @keyframes shake {
+            0% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="board">
+            <div onclick="insertSymbol(this)" class="opt1"></div>
+            <div onclick="insertSymbol(this)" class="opt2"></div>
+            <div onclick="insertSymbol(this)" class="opt3"></div>
+            <div onclick="insertSymbol(this)" class="opt4"></div>
+            <div onclick="insertSymbol(this)" class="opt5"></div>
+            <div onclick="insertSymbol(this)" class="opt6"></div>
+            <div onclick="insertSymbol(this)" class="opt7"></div>
+            <div onclick="insertSymbol(this)" class="opt8"></div>
+            <div onclick="insertSymbol(this)" class="opt9"></div>
+            <p class="finishGame"></p>
+            <p class="absolute"></p>
+            <p class="headertext">TicTacToe</p>
+            <button onclick="reload()">Retry</button>
+        </div>
+    </div>  
+</body>
+<script>
+    let op1 = document.querySelector('.opt1'),
+        op2 = document.querySelector('.opt2'),
+        op3 = document.querySelector('.opt3'),
+        op4 = document.querySelector('.opt4'),
+        op5 = document.querySelector('.opt5'),
+        op6 = document.querySelector('.opt6'),
+        op7 = document.querySelector('.opt7'),
+        op8 = document.querySelector('.opt8'),
+        op9 = document.querySelector('.opt9'),
+        finishGame = document.querySelector('.absolute')
+    let count = 2
+    function insertSymbol(TicOrTie) {
+        TicOrTie.style.animation = "shake .5s linear"
+        TicOrTie.style.backgroundColor = 'red'
+        if(count %2 == 0) {
+            if(TicOrTie.innerText == "x" || TicOrTie.innerText == "0" ){
+
+            }else {
+                TicOrTie.innerText = "x"
+                count++
+            }
+        }else {
+            if (TicOrTie.innerText == "x" || TicOrTie.innerText == "0"){
+
+            }else {
+                TicOrTie.innerText = "0"
+                count++
+            }
+        }
+        if(op1.innerText == "x" && op2.innerText == "x" && op3.innerText == "x" ||
+           op1.innerText == "0" && op2.innerText == "0" && op3.innerText == "0"
+        ){
+            if(op1.innerText == "x" && op2.innerText == "x" && op3.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+
+            }
+
+        }else if(
+            op1.innerText == "x" && op5.innerText == "x" && op9.innerText == "x" ||
+            op1.innerText == "0" && op5.innerText == "0" && op9.innerText == "0"){
+            if(op1.innerText == "x" && op5.innerText == "x" && op9.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+            }        
+        }else if(
+            op1.innerText == "x" && op4.innerText == "x" && op7.innerText == "x" ||
+            op1.innerText == "0" && op4.innerText == "0" && op7.innerText == "0"){
+                if(op1.innerText == "x" && op4.innerText == "x" && op7.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+            }
+        }else if(
+            op4.innerText == "x" && op5.innerText == "x" && op6.innerText == "x" ||
+            op4.innerText == "0" && op5.innerText == "0" && op6.innerText == "0"){
+            if(op4.innerText == "x" && op5.innerText == "x" && op6.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+            }
+        }else if(
+            op7.innerText == "x" && op8.innerText == "x" && op9.innerText == "x" ||
+            op7.innerText == "0" && op8.innerText == "0" && op9.innerText == "0"){
+            if(op7.innerText == "x" && op8.innerText == "x" && op9.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+            }
+        }else if(
+            op2.innerText == "x" && op5.innerText == "x" && op8.innerText == "x" ||
+            op2.innerText == "0" && op5.innerText == "0" && op8.innerText == "0"){
+            if(op2.innerText == "x" && op5.innerText == "x" && op8.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+            }
+        }else if(
+            op3.innerText == "x" && op6.innerText == "x" && op9.innerText == "x" ||
+            op3.innerText == "0" && op6.innerText == "0" && op9.innerText == "0"){
+            if(op3.innerText == "x" && op6.innerText == "x" && op9.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " +  "0"
+                finishGame.style.visibility = "visible"
+            }
+        }else if(
+            op7.innerText == "x" && op5.innerText == "x" && op3.innerText == "x" ||
+            op7.innerText == "0" && op5.innerText == "0" && op3.innerText == "0"){
+            if(op7.innerText == "x" && op5.innerText == "x" && op3.innerText == "x"){
+                finishGame.innerText = "win" + " " +  "x"
+                finishGame.style.visibility = "visible"
+            }else {
+                finishGame.innerText = "win" + " " + "0"
+                finishGame.style.visibility = "visible"
+            }
+        }
+    }
+    function reload() {
+        location.reload()
+    }
+</script>
+</html>
